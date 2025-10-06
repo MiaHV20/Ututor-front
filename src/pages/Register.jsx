@@ -2,27 +2,43 @@ import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../UtutorHome/Contexts/Header";
 
+import { registerUser } from '../api';
+
 export default function Register({ minimal = false }) {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('student');
+  const [password, setPassword] = useState('');
+  const [bio, setBio] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     const payload = {
-      name,
+      nombre,
+      apellido,
       email,
-      role
+      password,
+      bio
     };
 
-    console.log("Datos enviados:", payload);
-    localStorage.setItem("username", name);
-    alert("Registro exitoso 🎉 (simulado)");
-    navigate("/dashboard");
+    try {
+      const response = await registerUser(payload);
+      if (response.message) {
+        localStorage.setItem("username", `${nombre} ${apellido}`);
+        localStorage.setItem("userId", response.id); 
+        alert("Registro exitoso 🎉");
+        navigate("/dashboard");
+      } else {
+        setError("Error en el registro. Intenta nuevamente.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.detail || "Error inesperado en el servidor.");
+    }
   };
 
   return (
@@ -42,11 +58,21 @@ export default function Register({ minimal = false }) {
             <div className="mb-4">
               <input
                 type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
                 className="w-full px-4 py-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 transition-all rounded-md"
-                placeholder="Nombre completo"
+                placeholder="Nombre"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="text"
+                value={apellido}
+                onChange={(e) => setApellido(e.target.value)}
+                className="w-full px-4 py-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 transition-all rounded-md"
+                placeholder="Apellido"
                 required
               />
             </div>
@@ -54,7 +80,6 @@ export default function Register({ minimal = false }) {
             <div className="mb-4">
               <input
                 type="email"
-                id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 transition-all rounded-md"
@@ -63,16 +88,24 @@ export default function Register({ minimal = false }) {
               />
             </div>
 
-            <div className="mb-6">
-              <select
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+            <div className="mb-4">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 transition-all rounded-md"
-              >
-                <option value="student">Alumno</option>
-                <option value="tutor">Tutor</option>
-              </select>
+                placeholder="Contraseña"
+                required
+              />
+            </div>
+
+            <div className="mb-6">
+              <textarea
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="w-full px-4 py-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 transition-all rounded-md"
+                placeholder="Bio (opcional)"
+              />
             </div>
 
             <button
@@ -90,7 +123,6 @@ export default function Register({ minimal = false }) {
               <div className="flex justify-center mt-3">
                 <Link
                   to="/login"
-                  type="button"
                   className="bg-emerald-400 hover:bg-emerald-600 text-white font-semibold px-5 py-2 rounded-md transition-colors"
                 >
                   Inicia sesión

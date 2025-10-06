@@ -19,7 +19,7 @@ function Hero({ minimal = false }) {
         {!minimal && (
           <Link
             to="/login"
-            className="hero-button border border-blue-400 bg-blue-400 text-white hover:bg-blue-600 hover:text-white hover:border-blue-600 px-4 py-2 rounded-lg transition-colors"
+            className="hero-button border border-blue-500 bg-blue-500 text-white hover:bg-blue-700 hover:text-white hover:border-blue-700 px-4 py-2 rounded-lg transition-colors"
           >
             Estudia ahora
           </Link>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../UtutorHome/Contexts/Header";
+import { listUsers } from "../api";
 
 export default function Login({ minimal = false }) {
   const navigate = useNavigate();
@@ -8,14 +9,26 @@ export default function Login({ minimal = false }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (email === "test@ututor.com" && password === "1234") {
-      localStorage.setItem("username", "Mia Hurtado");
-      navigate("/dashboard");
-    } else {
-      setError("Correo o contraseña incorrectos");
+
+    try {
+      const usuarios = await listUsers();
+
+      const usuario = usuarios.find(
+        u => u.email === email && u.password === password
+      );
+
+      if (usuario) {
+        localStorage.setItem("user", JSON.stringify(usuario));
+        navigate("/dashboard");
+      } else {
+        setError("Correo o contraseña incorrectos");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Error de conexión con el servidor");
     }
   };
 
