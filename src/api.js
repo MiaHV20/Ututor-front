@@ -1,8 +1,13 @@
-const BASE_URL = "http://<ruta_balanceador>"; // <- Cambiar cuando tengas la ruta real
+const USUARIOS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/users";
+const MATERIAS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/materias";
+const TUTORIAS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/tutorias";
+const HISTORIAL_ASESORIAS_URL = "http://vpc-08ed223bfdfc22f50/historial_asesorias";
+
+/** ===== USUARIOS ===== **/
 
 // Registro de usuario
 export const registerUser = async (userData) => {
-  const res = await fetch(`${BASE_URL}/register`, {
+  const res = await fetch(`${USUARIOS_SERVICE_URL}/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
@@ -12,21 +17,21 @@ export const registerUser = async (userData) => {
 
 // Obtener lista de usuarios (para login)
 export const listUsers = async () => {
-  const res = await fetch(`${BASE_URL}/users`);
+  const res = await fetch(`${USUARIOS_SERVICE_URL}`);
   if (!res.ok) throw new Error("Error al obtener usuarios");
   return res.json();
 };
 
 // Obtener usuario por ID (para perfil)
 export const getUser = async (id) => {
-  const res = await fetch(`${BASE_URL}/users/${id}`);
+  const res = await fetch(`${USUARIOS_SERVICE_URL}/${id}`);
   if (!res.ok) throw new Error("Error al obtener usuario");
   return res.json();
 };
 
 // Actualizar usuario por ID (para perfil)
 export const updateUser = async (id, updates) => {
-  const res = await fetch(`${BASE_URL}/users/${id}`, {
+  const res = await fetch(`${USUARIOS_SERVICE_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updates),
@@ -35,17 +40,40 @@ export const updateUser = async (id, updates) => {
   return res.json();
 };
 
+/** ===== MATERIAS ===== **/
+
 // Obtener materias (con filtros opcionales)
 export const getMaterias = async (params = {}) => {
   const query = new URLSearchParams(params).toString();
-  const res = await fetch(`${BASE_URL}/materias?${query}`);
+  const res = await fetch(`${MATERIAS_SERVICE_URL}?${query}`);
   if (!res.ok) throw new Error("Error al obtener materias");
   return res.json();
 };
 
 // Obtener materia por ID
 export const getMateriaById = async (id) => {
-  const res = await fetch(`${BASE_URL}/materias/${id}`);
+  const res = await fetch(`${MATERIAS_SERVICE_URL}/${id}`);
   if (!res.ok) throw new Error("Materia no encontrada");
+  return res.json();
+};
+
+/** ===== TUTORIAS ===== **/
+
+// Ejemplo de función para reservar una tutoría
+export const reservarTutoria = async (data) => {
+  const res = await fetch(`${TUTORIAS_SERVICE_URL}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
+
+/** ===== HISTORIAL DE ASESORÍAS ===== **/
+
+// Ejemplo: obtener historial de asesorías por usuario
+export const getHistorialAsesorias = async (userId) => {
+  const res = await fetch(`${HISTORIAL_ASESORIAS_URL}?userId=${userId}`);
+  if (!res.ok) throw new Error("Error al obtener historial");
   return res.json();
 };
