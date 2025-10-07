@@ -1,7 +1,7 @@
-const USUARIOS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/users";
-const MATERIAS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/materias";
-const TUTORIAS_SERVICE_URL = "http://vpc-08ed223bfdfc22f50/tutorias";
-const HISTORIAL_ASESORIAS_URL = "http://vpc-08ed223bfdfc22f50/historial_asesorias";
+const USUARIOS_SERVICE_URL = import.meta.env.VITE_USUARIOS_SERVICE_URL;
+const MATERIAS_SERVICE_URL = import.meta.env.VITE_MATERIAS_SERVICE_URL;
+const TUTORIAS_SERVICE_URL = import.meta.env.VITE_TUTORIAS_SERVICE_URL;
+const HISTORIAL_ASESORIAS_URL = import.meta.env.VITE_HISTORIAL_ASESORIAS_URL;
 
 /** ===== USUARIOS ===== **/
 
