@@ -1,7 +1,7 @@
-const USUARIOS_SERVICE_URL = import.meta.env.VITE_USUARIOS_SERVICE_URL;
-const MATERIAS_SERVICE_URL = import.meta.env.VITE_MATERIAS_SERVICE_URL;
-const TUTORIAS_SERVICE_URL = import.meta.env.VITE_TUTORIAS_SERVICE_URL;
-const HISTORIAL_ASESORIAS_URL = import.meta.env.VITE_HISTORIAL_ASESORIAS_URL;
+const USUARIOS_SERVICE_URL = "/api/users";
+const MATERIAS_SERVICE_URL = "/api/materias";
+const TUTORIAS_SERVICE_URL = "/api/tutorias";
+const HISTORIAL_ASESORIAS_URL = "/api/historial_asesorias";
 
 /** ===== USUARIOS ===== **/
 
