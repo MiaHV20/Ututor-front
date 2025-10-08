@@ -1,7 +1,9 @@
-const USUARIOS_SERVICE_URL = "/api/users";
-const MATERIAS_SERVICE_URL = "/api/materias";
-const TUTORIAS_SERVICE_URL = "/api/tutorias";
-const HISTORIAL_ASESORIAS_URL = "/api/historial_asesorias";
+const BASE_URL = "http://lb-prod-656082431.us-east-1.elb.amazonaws.com";
+
+const USUARIOS_SERVICE_URL = `${BASE_URL}/users`;
+const MATERIAS_SERVICE_URL = `${BASE_URL}/materias`;
+const TUTORIAS_SERVICE_URL = `${BASE_URL}/tutorias`;
+const HISTORIAL_ASESORIAS_URL = `${BASE_URL}/historial_asesorias`;
 
 /** ===== USUARIOS ===== **/
 

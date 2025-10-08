@@ -125,10 +125,7 @@ export default function Register({ minimal = false }) {
               </select>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-400 hover:bg-blue-600 text-white font-semibold py-4 transition-colors rounded-md"
-            >
+            <button type="submit"className="w-full bg-blue-400 hover:bg-blue-600 text-white font-semibold py-4 transition-colors rounded-md cursor-pointer">
               Registrarse
             </button>
 
