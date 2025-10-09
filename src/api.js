@@ -3,7 +3,7 @@ const BASE_URL = "https://lb-prod-656082431.us-east-1.elb.amazonaws.com";
 const USUARIOS_SERVICE_URL = `${BASE_URL}/estudiantes`;
 const MATERIAS_SERVICE_URL = `${BASE_URL}/materias`;
 const TUTORIAS_SERVICE_URL = `${BASE_URL}/tutorias`;
-const HISTORIAL_ASESORIAS_URL = `${BASE_URL}/historial_asesorias`;
+const HISTORIAL_ASESORIAS_URL = `${BASE_URL}/historial-asesorias`;
 
 /** ===== USUARIOS ===== **/
 
