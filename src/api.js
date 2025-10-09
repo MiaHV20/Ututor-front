@@ -1,4 +1,4 @@
-const BASE_URL = "http://lb-prod-656082431.us-east-1.elb.amazonaws.com";
+const BASE_URL = "https://lb-prod-656082431.us-east-1.elb.amazonaws.com";
 
 const USUARIOS_SERVICE_URL = `${BASE_URL}/users`;
 const MATERIAS_SERVICE_URL = `${BASE_URL}/materias`;
